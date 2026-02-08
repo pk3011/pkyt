@@ -17,6 +17,7 @@ def get_channel_live_videos(channel_url):
         'no_warnings': True,
         'extract_flat': True, 
         'playlistend': 3,
+        'cookiefile': 'cookies.txt',
     }
     search_url = channel_url if "/streams" in channel_url else channel_url.rstrip('/') + "/streams"
     try:
@@ -32,7 +33,7 @@ def get_channel_live_videos(channel_url):
 
 def get_direct_link(video_id):
     video_url = f"https://www.youtube.com/watch?v={video_id}"
-    ydl_opts = {'quiet': True, 'no_warnings': True, 'format': 'best'}
+    ydl_opts = {'quiet': True, 'no_warnings': True, 'format': 'best', 'cookiefile': 'cookies.txt'}
     try:
         with yt_dlp.YoutubeDL(ydl_opts) as ydl:
             info = ydl.extract_info(video_url, download=False)
